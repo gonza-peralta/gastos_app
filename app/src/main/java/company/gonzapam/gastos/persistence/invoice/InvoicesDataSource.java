@@ -83,7 +83,7 @@ public class InvoicesDataSource {
         Invoice invoice = new Invoice();
         invoice.setId(cursor.getLong(0));
         invoice.setName(cursor.getString(1));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS.SSS");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
         Date date = new Date();
         try {
             date= dateFormat.parse(cursor.getString(2));
