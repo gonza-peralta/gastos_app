@@ -3,6 +3,8 @@ package company.gonzapam.gastos.persistence.invoice;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,6 +18,7 @@ public class Invoice {
     public static final String NAME = "name";
     public static final String DATE = "date";
     public static final String AMOUNT = "amount";
+    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
 
     @DatabaseField(generatedId = true, columnName = ID)
     private long id;
@@ -29,10 +32,10 @@ public class Invoice {
     public Invoice() {
         // ORMLite needs a no-arg constructor
     }
-    public Invoice(long id, String name, Date date, Float amount) {
+    public Invoice(long id, String name, String date, Float amount) throws ParseException {
         this.id = id;
         this.name = name;
-        this.date = date;
+        this.date = df.parse(date);
         this.amount = amount;
     }
 
@@ -56,8 +59,8 @@ public class Invoice {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String date) throws ParseException {
+        this.date = df.parse(date);
     }
 
     public Float getAmount() {

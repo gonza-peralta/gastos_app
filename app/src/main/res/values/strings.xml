@@ -5,7 +5,7 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_scanear">Escanear</string>
     <string name="title_activity_main">Actividad Principal</string>
-    <string name="title_activity_display_message">My Message</string>
+    <string name="title_activity_display_message">Factura escaneada</string>
 
     <string name="hello_world">Hello world!</string>
 </resources>

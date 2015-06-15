@@ -3,7 +3,6 @@ package company.gonzapam.gastos;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -13,18 +12,22 @@ public class DisplayMessageActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_display_message);
 
         // Get the message from the intent
         Intent intent = getIntent();
-        String message = intent.getStringExtra(HomeActivity.EXTRA_MESSAGE);
+        String rut = intent.getStringExtra(HomeActivity.RUT);
+        String amount = intent.getStringExtra(HomeActivity.AMOUNT);
+        String date = intent.getStringExtra(HomeActivity.DATE);
 
-        // Create the text view
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(message);
+        TextView fecha_tx = (TextView) findViewById(R.id.fecha_value);
+        fecha_tx.setText(date);
 
-        // Set the text view as the activity layout
-        setContentView(textView);
+        TextView rut_tx = (TextView) findViewById(R.id.rut_value);
+        rut_tx.setText(rut);
+
+        TextView mnt_tx = (TextView) findViewById(R.id.monto_value);
+        mnt_tx.setText(amount);
     }
 
     @Override

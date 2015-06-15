@@ -19,7 +19,9 @@ import static java.lang.System.*;
 
 public class HomeActivity extends ActionBarActivity {
 
-    public final static String EXTRA_MESSAGE = "company.gonzapam.gastos.MESSAGE";
+    public final static String RUT = "company.gonzapam.gastos.RUT";
+    public final static String DATE = "company.gonzapam.gastos.DATE";
+    public final static String AMOUNT = "company.gonzapam.gastos.AMOUNT";
     static final int PICK_QR_REQUEST = 0;
     private SharedPreferences mPrefs;
 
@@ -53,12 +55,6 @@ public class HomeActivity extends ActionBarActivity {
 
     /** Called when the user clicks the Escanear button */
     public void scannig_view(View view) {
-//        Intent intent = new Intent(this, DisplayMessageActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.edit_message);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
-//        startActivity(intent);
-
         try {
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
@@ -78,19 +74,9 @@ public class HomeActivity extends ActionBarActivity {
                 String contents = data.getStringExtra("SCAN_RESULT");
                 out.println(contents);
 
-                //Trato de leer la pagina de dgi
-                /*AsyncTask<String, Void, String> result = new GetRequest(this).execute(contents);
-                out.println("Despues del get");
-                try {
-                    out.println(result.get());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }*/
                 String[] separated = contents.split(",");
                 String rut = separated[0].split("\\?")[1];
-                String monto = separated[4];
+                String amount = separated[4];
 
                 out.println(separated[5]);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -111,7 +97,14 @@ public class HomeActivity extends ActionBarActivity {
                 rut_tx.setText(rut);
 
                 TextView mnt_tx = (TextView) findViewById(R.id.monto_value);
-                mnt_tx.setText(monto);
+                mnt_tx.setText(amount);
+
+                // Start new activity
+                Intent intent = new Intent(this, DisplayMessageActivity.class);
+                intent.putExtra(RUT, rut);
+                intent.putExtra(AMOUNT, amount);
+                intent.putExtra(DATE, fecha);
+                startActivity(intent);
             }
             if(resultCode == RESULT_CANCELED){
                 out.println("Cancelo la lectura");
