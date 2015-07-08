@@ -39,17 +39,15 @@
             android:id="@+id/rut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rut: "
+            android:text="Concepto: "
             android:textColorHint="#ff000000"
             android:textStyle="bold"
             android:padding="10dp"/>
 
-        <TextView
+        <EditText
             android:id="@+id/rut_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColorHint="#ff000000"
-            android:textStyle="bold"
             android:padding="10dp"
             android:freezesText="true"/>
     </LinearLayout>
@@ -77,5 +75,14 @@
             android:padding="10dp"
             android:freezesText="true"/>
     </LinearLayout>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/button_add"
+        android:onClick="add_invoice"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Imprimir todos"
+        android:onClick="print_invoices"/>
 </LinearLayout>

@@ -56,12 +56,11 @@ public class HomeActivity extends ActionBarActivity {
     /** Called when the user clicks the Escanear button */
     public void scannig_view(View view) {
         try {
-            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
-            startActivityForResult(intent, PICK_QR_REQUEST);
+            Intent qrDroid = new Intent("la.droid.qr.scan");
+            startActivityForResult(qrDroid, PICK_QR_REQUEST);
         } catch (Exception e) {
-            Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
-            Intent marketIntent = new Intent(Intent.ACTION_VIEW,marketUri);
+            Uri marketUri = Uri.parse("http://market.android.com/details?id=la.droid.qr");
+            Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
             startActivity(marketIntent);
         }
     }
@@ -71,7 +70,7 @@ public class HomeActivity extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_QR_REQUEST) {
             if (resultCode == RESULT_OK) {
-                String contents = data.getStringExtra("SCAN_RESULT");
+                String contents = data.getExtras().getString("la.droid.qr.result");
                 out.println(contents);
 
                 String[] separated = contents.split(",");

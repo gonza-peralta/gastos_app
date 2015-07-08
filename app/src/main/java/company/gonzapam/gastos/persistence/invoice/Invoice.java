@@ -18,7 +18,9 @@ public class Invoice {
     public static final String NAME = "name";
     public static final String DATE = "date";
     public static final String AMOUNT = "amount";
-    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+    //private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+    //private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
     @DatabaseField(generatedId = true, columnName = ID)
     private long id;
@@ -32,8 +34,7 @@ public class Invoice {
     public Invoice() {
         // ORMLite needs a no-arg constructor
     }
-    public Invoice(long id, String name, String date, Float amount) throws ParseException {
-        this.id = id;
+    public Invoice(String name, String date, Float amount) throws ParseException {
         this.name = name;
         this.date = df.parse(date);
         this.amount = amount;
